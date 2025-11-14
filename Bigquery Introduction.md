@@ -24,7 +24,7 @@
 
 ---
 
-## 2. Key Concepts (Simple, Non-Technical)
+## 2. Key Concepts 
 
 | Concept         | Description |
 |-----------------|-------------|
@@ -161,9 +161,6 @@ These are high-impact, easy rules to keep queries fast and efficient:
 - Remove or archive obsolete tables — if a table is outdated, archive to Cloud Storage (if needed) and delete from BigQuery.
 - Use labels for discoverability (e.g., `team=marketing`, `retention=90d`).
 - If you notice slow queries, add a partition/cluster recommendation request to your analytics team or apply BigQuery’s recommender in console.
-
-
-> **Note:** BigQuery is managed — you do not need to vacuum or compact tables like in some other systems. Partition and table expirations are safe ways to clean up old data.
 
 ---
 
