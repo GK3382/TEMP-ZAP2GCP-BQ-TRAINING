@@ -13,19 +13,16 @@
 ---
 
 
-## 1. Executive Overview
+## 1. Overview
 
 
 **What it is:**
 
 BigQuery Pipelines (within BigQuery Studio) lets you create, sequence, schedule, and run data workflows made of SQL queries, notebooks, and data preparation steps — all without leaving BigQuery Studio. It’s a lightweight orchestrator for SQL + notebook-based ETL/ELT that keeps work close to your data.
 
-**Google Cloud Documentation:**
 - [Pipelines Introduction](https://cloud.google.com/bigquery/docs/pipelines-introduction)
-- [BigQuery](https://cloud.google.com/bigquery)
 
-**YouTube Links:**
-- [How to build a data pipeline with Google Cloud](https://www.youtube.com/watch?v=yVUXvabnMRU)
+- [How to build a data pipeline with Google Cloud(Video)](https://www.youtube.com/watch?v=yVUXvabnMRU)
 
 ---
 

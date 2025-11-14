@@ -184,21 +184,8 @@ These are high-impact, easy rules to keep queries fast and efficient:
 ---
 
 
-## 8. Example Simple Classroom Exercises (for Trainers)
 
-1. **Load a small CSV into a dataset (console):**
-	 - Create dataset `training_demo`, upload `orders_sample.csv`, inspect schema.
-2. **Run a date-filtered query:**
-	 - Find total sales for last 7 days. Teach `WHERE date BETWEEN ...`.
-3. **Try a large query vs filtered query:**
-	 - Run `SELECT COUNT(*)` on full table, then run with a 30-day filter — compare runtime & bytes scanned (console shows bytes scanned).
-4. **Create a clustered table (trainer action):**
-	 - Show speed difference for common filters.
-
----
-
-
-## 9. Links & Reference Material (Plain Text for Copy/Paste)
+## 8. Links & Reference Material (Plain Text for Copy/Paste)
 
 
 ### Official Docs (Primary Sources)
