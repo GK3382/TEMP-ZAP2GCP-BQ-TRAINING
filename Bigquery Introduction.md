@@ -1,11 +1,6 @@
 
 
-# BigQuery (Beginner) — User Training Guide
-
----
-
-> **Purpose:**
-> Teach business and layman users how BigQuery organizes data (datasets & tables), how to create/use them, and simple optimizations & maintenance rules to keep queries fast and friendly. *(No IAM or billing details.)*
+# BigQuery
 
 ---
 
@@ -22,7 +17,7 @@
 ## 1. What is BigQuery?
 
 
-**BigQuery** is Google Cloud’s fully managed, serverless data warehouse for running SQL analytics on very large datasets—without managing infrastructure. Users write SQL (GoogleSQL) to query data; BigQuery automatically handles scaling.
+**BigQuery** is Google Cloud’s fully managed, serverless data warehouse for running SQL analytics on very large datasets—without managing infrastructure. SQL (GoogleSQL) is used to query data; BigQuery automatically handles scaling.
 
 - [Google Cloud Documentation](https://cloud.google.com/bigquery)
 - [Official Docs Homepage](https://docs.cloud.google.com/bigquery/docs)
@@ -59,14 +54,9 @@
 2. From the left menu, choose **BigQuery** (or search “BigQuery”).
 	 - [Open BigQuery Console](https://console.cloud.google.com/bigquery)
 
-### B. Create a Dataset (a folder for tables)
+### B. Navigate to a Dataset (a folder for tables)
 1. In BigQuery left pane → select your project.
-2. Click **Create dataset**.
-3. Give a **Dataset ID** (simple name, e.g., `sales_data`) and optional description.
-4. Set **Data location** (default usually OK) and **Default table expiration** if you want tables to auto-expire. (You can leave expiration blank.)
-5. Click **Create**.
-	 - [Create Datasets Doc](https://docs.cloud.google.com/bigquery/docs/datasets)
-
+2. Click on **Dataset**.
 ### C. Create or Load a Table
 
 **Options:**
@@ -101,7 +91,7 @@
 ---
 
 
-## 4. Basic Table Properties Users Should Know (and Set When Creating Tables)
+## 4. Basic Table Properties to Know (and Set When Creating Tables)
 
 - **Table ID / Name:** Choose clear, descriptive names (e.g., `orders_2025`).
 - **Schema:** List of columns and types (`STRING`, `INT64`, `FLOAT64`, `TIMESTAMP`, `DATE`, etc.). Keep types correct to avoid surprises.
@@ -118,11 +108,12 @@
 ---
 
 
-## 5. Simple, Practical Optimization Tips for Business Users
+## 5. Simple, Practical Optimization Tips
 
-> *No code changes required beyond query writing!*
 
-These are the high-impact, easy rules non-technical users can follow to keep queries fast and friendly:
+*No code changes required beyond query writing!*
+
+These are high-impact, easy rules to keep queries fast and efficient:
 
 
 
@@ -158,7 +149,7 @@ These are the high-impact, easy rules non-technical users can follow to keep que
 ---
 
 
-## 6. Maintenance & Housekeeping (What Business Users Can Do)
+## 6. Maintenance & Housekeeping
 
 
 
