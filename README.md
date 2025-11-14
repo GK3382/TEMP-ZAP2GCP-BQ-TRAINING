@@ -33,12 +33,3 @@ Welcome! This repository contains beginner-to-intermediate training resources fo
 
 - [Google BigQuery Documentation](https://cloud.google.com/bigquery/docs)
 - [BigQuery Studio Overview](https://cloud.google.com/bigquery/docs/bigquery-studio-overview)
-- [BigQuery ML Overview](https://cloud.google.com/bigquery-ml/docs)
-
----
-
-## 📝 Contribution
-
-Feel free to suggest improvements or contribute new training modules via pull requests.
-
----

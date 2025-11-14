@@ -1,38 +1,49 @@
 
+
 # BigQuery (Beginner) — User Training Guide
 
 ---
 
 > **Purpose:**
-> 
 > Teach business and layman users how BigQuery organizes data (datasets & tables), how to create/use them, and simple optimizations & maintenance rules to keep queries fast and friendly. *(No IAM or billing details.)*
 
 ---
 
+## 📚 Navigation
+
+- [Home (README)](./README.md)
+- [BigQuery Pipelines](./Bigquery%20Pipelines.md)
+- [BigQuery Python Notebook](./Bigquery%20Python%20Notebook.md)
+- [When to use BigQuery SQL Editor and BigQuery Python Notebook](./When%20to%20use%20BigQuery%20SQL%20Editor%20and%20BigQuery%20Python%20Notebook.md)
+
+---
+
+
 ## 1. What is BigQuery?
+
 
 **BigQuery** is Google Cloud’s fully managed, serverless data warehouse for running SQL analytics on very large datasets—without managing infrastructure. Users write SQL (GoogleSQL) to query data; BigQuery automatically handles scaling.
 
-
-[Google Cloud Documentation](https://cloud.google.com/bigquery)
-
-[Official Docs Homepage](https://docs.cloud.google.com/bigquery/docs)
+- [Google Cloud Documentation](https://cloud.google.com/bigquery)
+- [Official Docs Homepage](https://docs.cloud.google.com/bigquery/docs)
 
 ---
 
 ## 2. Key Concepts (Simple, Non-Technical)
 
-| Concept      | Description |
-|--------------|-------------|
-| **Project**  | Top-level container in Google Cloud (your org/project). |
-| **Dataset**  | Logical container inside a project used to group tables and views. Like a folder or database. Each table belongs to a dataset. [Docs](https://docs.cloud.google.com/bigquery/docs/datasets-intro) |
-| **Table**    | Where actual rows/columns are stored. Types: native BigQuery tables, external tables (data kept in Cloud Storage), and views (saved queries). [Docs](https://docs.cloud.google.com/bigquery/docs/tables-intro) |
-| **Partitioning** | Splitting a table by date (or integer range) so queries scan only relevant slices. |
-| **Clustering**   | Ordering data by one or more columns to speed up queries that filter/join on those columns. [Docs](https://docs.cloud.google.com/bigquery/docs/clustered-tables) |
+| Concept         | Description |
+|-----------------|-------------|
+| **Project**     | Top-level container in Google Cloud (your org/project). |
+| **Dataset**     | Logical container inside a project used to group tables and views. Like a folder or database. Each table belongs to a dataset. [Docs](https://docs.cloud.google.com/bigquery/docs/datasets-intro) |
+| **Table**       | Where actual rows/columns are stored. Types: native BigQuery tables, external tables (data kept in Cloud Storage), and views (saved queries). [Docs](https://docs.cloud.google.com/bigquery/docs/tables-intro) |
+| **Partitioning**| Splitting a table by date (or integer range) so queries scan only relevant slices. |
+| **Clustering**  | Ordering data by one or more columns to speed up queries that filter/join on those columns. [Docs](https://docs.cloud.google.com/bigquery/docs/clustered-tables) |
+
 
 **Quick Analogy:**
 
 > **Project** → **Dataset** (folder) → **Table** (spreadsheet)
+
 
 **Useful Docs:**
 - [Datasets Intro](https://docs.cloud.google.com/bigquery/docs/datasets-intro)
@@ -43,12 +54,12 @@
 
 ## 3. Step-by-Step: Common Tasks in the Cloud Console
 
-### **A. Open BigQuery in the Google Cloud Console**
+### A. Open BigQuery in the Google Cloud Console
 1. Sign into Google Cloud Console.
 2. From the left menu, choose **BigQuery** (or search “BigQuery”).
 	 - [Open BigQuery Console](https://console.cloud.google.com/bigquery)
 
-### **B. Create a Dataset (a folder for tables)**
+### B. Create a Dataset (a folder for tables)
 1. In BigQuery left pane → select your project.
 2. Click **Create dataset**.
 3. Give a **Dataset ID** (simple name, e.g., `sales_data`) and optional description.
@@ -56,7 +67,8 @@
 5. Click **Create**.
 	 - [Create Datasets Doc](https://docs.cloud.google.com/bigquery/docs/datasets)
 
-### **C. Create or Load a Table**
+### C. Create or Load a Table
+
 **Options:**
 - Upload CSV/JSON from your computer
 - Load from Cloud Storage
@@ -73,7 +85,7 @@
 7. Click **Create table**.
 	 - [Create Tables](https://docs.cloud.google.com/bigquery/docs/tables)
 
-### **D. Run a Simple Query**
+### D. Run a Simple Query
 1. Click **Compose new query**.
 2. Example:
 	 ```sql
@@ -88,6 +100,7 @@
 
 ---
 
+
 ## 4. Basic Table Properties Users Should Know (and Set When Creating Tables)
 
 - **Table ID / Name:** Choose clear, descriptive names (e.g., `orders_2025`).
@@ -97,17 +110,20 @@
 - **Table expiration / partition expiration:** Set to automatically remove old data (good housekeeping).
 - **Description & labels:** Add short description and labels (e.g., `team:analytics`) to make tables easy to discover.
 
+
 **Docs References:**
 - [Datasets & Tables](https://docs.cloud.google.com/bigquery/docs/datasets-intro)
 - [Tables](https://docs.cloud.google.com/bigquery/docs/tables-intro)
 
 ---
 
+
 ## 5. Simple, Practical Optimization Tips for Business Users
 
 > *No code changes required beyond query writing!*
 
 These are the high-impact, easy rules non-technical users can follow to keep queries fast and friendly:
+
 
 
 ### Quick Optimization Rules
@@ -134,13 +150,16 @@ These are the high-impact, easy rules non-technical users can follow to keep que
 - **Leverage BigQuery’s recommendations**
 	- BigQuery provides partitioning & clustering recommendations you can apply.
 
+
 **Recommended Reading:**
 - [BigQuery Performance Article — Google Cloud Blog](https://cloud.google.com/blog/products/data-analytics/new-bigquery-partitioning-and-clustering-recommendations)
 - [Performance Optimization with BigQuery — Google Cloud / Medium](https://medium.com/google-cloud/performance-optimization-with-bigquery-821c8b648c84)
 
 ---
 
+
 ## 6. Maintenance & Housekeeping (What Business Users Can Do)
+
 
 
 ### Weekly / Monthly Checklist (Simple):
@@ -152,11 +171,14 @@ These are the high-impact, easy rules non-technical users can follow to keep que
 - Use labels for discoverability (e.g., `team=marketing`, `retention=90d`).
 - If you notice slow queries, add a partition/cluster recommendation request to your analytics team or apply BigQuery’s recommender in console.
 
+
 > **Note:** BigQuery is managed — you do not need to vacuum or compact tables like in some other systems. Partition and table expirations are safe ways to clean up old data.
 
 ---
 
+
 ## 7. “Do This / Don’t Do This” Cheat Sheet
+
 
 ### Do:
 - Use partition filters (date ranges).
@@ -165,12 +187,14 @@ These are the high-impact, easy rules non-technical users can follow to keep que
 - Name & describe tables.
 - Use BigQuery recommended partitioning/clustering hints if available.
 
+
 ### Don’t:
 - Run `SELECT *` on multi-GB/TB tables.
 - Compare unfiltered huge tables without sampling.
 - Keep infinite retention when data is not required.
 
 ---
+
 
 ## 8. Example Simple Classroom Exercises (for Trainers)
 
@@ -185,9 +209,11 @@ These are the high-impact, easy rules non-technical users can follow to keep que
 
 ---
 
+
 ## 9. Links & Reference Material (Plain Text for Copy/Paste)
 
-### **Official Docs (Primary Sources)**
+
+### Official Docs (Primary Sources)
 - [BigQuery](https://cloud.google.com/bigquery)
 - [BigQuery Docs Index](https://docs.cloud.google.com/bigquery/docs)
 - [Datasets Intro](https://docs.cloud.google.com/bigquery/docs/datasets-intro)
@@ -196,11 +222,13 @@ These are the high-impact, easy rules non-technical users can follow to keep que
 - [Partitioned Tables & Clustering](https://docs.cloud.google.com/bigquery/docs/clustered-tables)
 - [Manage Partition & Cluster Recommendations](https://docs.cloud.google.com/bigquery/docs/manage-partition-cluster-recommendations)
 
-### **Official Learning / Videos**
+
+### Official Learning / Videos
 - [Google Cloud YouTube Channel](https://www.youtube.com/googlecloudplatform)
 - [BigQuery Workshop / Tutorials Playlist](https://www.youtube.com/playlist?list=PLA3TuOOaQOnnCB9ktgnY0OZb-fsU1K8nI)
 - [Beginner BigQuery Tutorial — Example](https://www.youtube.com/watch?v=MH5M2Crn6Ag)
 
-### **Optimization / Practical Articles**
+
+### Optimization / Practical Articles
 - [Google Cloud Blog on Partitioning & Clustering](https://cloud.google.com/blog/products/data-analytics/new-bigquery-partitioning-and-clustering-recommendations)
 - [Performance Optimization with BigQuery — Google Cloud / Medium](https://medium.com/google-cloud/performance-optimization-with-bigquery-821c8b648c84)

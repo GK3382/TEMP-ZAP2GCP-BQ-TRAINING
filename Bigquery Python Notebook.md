@@ -1,13 +1,27 @@
 
+
 # BigQuery Notebooks – Comprehensive Training Guide
 
 ---
 
+## 📚 Navigation
+
+- [Home (README)](./README.md)
+- [BigQuery Introduction](./Bigquery%20Introduction.md)
+- [BigQuery Pipelines](./Bigquery%20Pipelines.md)
+- [When to use BigQuery SQL Editor and BigQuery Python Notebook](./When%20to%20use%20BigQuery%20SQL%20Editor%20and%20BigQuery%20Python%20Notebook.md)
+
+---
+
+
 ## 1. Introduction
+
 
 ### What is BigQuery Notebook?
 
+
 **BigQuery Notebook** is an interactive environment inside BigQuery Studio that allows you to write and run SQL and Python code together. It combines code, text, and visualizations — just like a Jupyter Notebook — but fully integrated into Google Cloud BigQuery.
+
 
 **With BigQuery Notebooks, you can:**
 
@@ -16,8 +30,10 @@
 - Document your workflow with Markdown cells
 - Save, share, and collaborate on analysis all within BigQuery Studio
 
-**Official Documentation:**  
-https://cloud.google.com/bigquery/docs/notebooks-introduction
+
+**Official Documentation:**
+- [BigQuery Notebooks Introduction](https://cloud.google.com/bigquery/docs/notebooks-introduction)
+
 
 #### Why use BigQuery Notebooks?
 
@@ -27,6 +43,7 @@ https://cloud.google.com/bigquery/docs/notebooks-introduction
 - Support reproducible workflows for analytics and ML
 
 ---
+
 
 ## 2. How to Access BigQuery Notebooks
 
@@ -39,10 +56,12 @@ Follow these steps to get started:
 5. Give your notebook a name and choose a region (e.g., US-central1)
 6. Once created, the notebook will open in a new tab — ready for use
 
-**Reference:**  
-https://cloud.google.com/bigquery/docs/create-notebooks
+
+**Reference:**
+- [Create a BigQuery Notebook](https://cloud.google.com/bigquery/docs/create-notebooks)
 
 ---
+
 
 ## 3. Understanding the Notebook Layout
 
@@ -52,6 +71,7 @@ Each BigQuery Notebook has the following key elements:
 - **Markdown Cells:** Write descriptions, documentation, or instructions
 - **Output Cells:** Display results of queries or Python code
 - **Toolbar:** Run cells, add cells, or switch between SQL and Python modes
+
 
 **Cell Types:**
 
@@ -63,9 +83,11 @@ Each BigQuery Notebook has the following key elements:
 
 ---
 
+
 ## 4. Getting Started – Step-by-Step Example
 
 Let’s go through a small example to understand how you can use BigQuery Notebooks.
+
 
 ### Step 1: Run a SQL Query
 
@@ -87,6 +109,7 @@ LIMIT 10;
 ```
 
 Click **Run**. You’ll see a table output with the top 10 most common baby names in Texas.
+
 
 ### Step 2: Use Python to Visualize Data
 
@@ -126,9 +149,11 @@ plt.show()
 
 This will generate a bar chart directly inside the notebook.
 
+
 ### Step 3: Add Markdown Documentation
 
 Use Markdown cells to add headings, notes, or explanations.
+
 
 **Example:**
 
@@ -145,6 +170,7 @@ This analysis identifies the top 10 baby names in Texas using BigQuery public da
 Markdown helps keep your notebook readable and professional.
 
 ---
+
 
 ## 5. Best Practices for Working with BigQuery Notebooks
 
@@ -163,6 +189,7 @@ Here are some simple best practices to ensure smooth performance and clarity:
 
 ---
 
+
 ## 6. Advanced Use Cases
 
 Once you’re comfortable with basics, you can explore more advanced scenarios:
@@ -173,11 +200,13 @@ Once you’re comfortable with basics, you can explore more advanced scenarios:
 - **Automated Reports:** Create a standard notebook for weekly or monthly analysis and share results with your team
 - **Dashboards and Visuals:** Combine plots and markdown text to build quick, lightweight dashboards
 
+
 **For deeper examples, check:**
-- https://medium.com/techsalo-infotech/how-to-use-python-notebook-in-bigquery-1f724793766f
-- https://hevodata.com/learn/bigquery-jupyter-notebook/
+- [Medium: How to use Python Notebook in BigQuery](https://medium.com/techsalo-infotech/how-to-use-python-notebook-in-bigquery-1f724793766f)
+- [HevoData: BigQuery Jupyter Notebook](https://hevodata.com/learn/bigquery-jupyter-notebook/)
 
 ---
+
 
 ## 7. Performance Optimization Tips
 
@@ -199,10 +228,12 @@ Once you’re comfortable with basics, you can explore more advanced scenarios:
 - Use sample data for visualization instead of full datasets
 - Cache intermediate results when exploring multiple charts
 
-**For more BigQuery optimization best practices:**  
-https://cloud.google.com/blog/topics/developers-practitioners/bigquery-workload-management-best-practices
+
+**For more BigQuery optimization best practices:**
+- [BigQuery Workload Management Best Practices](https://cloud.google.com/blog/topics/developers-practitioners/bigquery-workload-management-best-practices)
 
 ---
+
 
 ## 8. Troubleshooting Common Issues
 
@@ -217,7 +248,9 @@ https://cloud.google.com/blog/topics/developers-practitioners/bigquery-workload-
 
 ---
 
+
 ## 9. Additional Resources
+
 
 Here are some helpful links for further learning:
 
@@ -227,6 +260,7 @@ Here are some helpful links for further learning:
 - [Medium Example – Python Notebook in BigQuery](https://medium.com/techsalo-infotech/how-to-use-python-notebook-in-bigquery-1f724793766f)
 
 ---
+
 
 ## 10. Summary
 

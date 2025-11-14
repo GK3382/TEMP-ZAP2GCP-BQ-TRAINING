@@ -1,7 +1,20 @@
+
 # BigQuery Pipelines — Training Guide
+
 ---
 
+## 📚 Navigation
+
+- [Home (README)](./README.md)
+- [BigQuery Introduction](./Bigquery%20Introduction.md)
+- [BigQuery Python Notebook](./Bigquery%20Python%20Notebook.md)
+- [When to use BigQuery SQL Editor and BigQuery Python Notebook](./When%20to%20use%20BigQuery%20SQL%20Editor%20and%20BigQuery%20Python%20Notebook.md)
+
+---
+
+
 ## 1. Executive Overview
+
 
 **What it is:**
 
@@ -16,6 +29,7 @@ BigQuery Pipelines (within BigQuery Studio) lets you create, sequence, schedule,
 
 ---
 
+
 ## 2. When to Use BigQuery Pipelines
 
 Use pipelines when you need:
@@ -24,9 +38,11 @@ Use pipelines when you need:
 - A simple DAG-style workflow (task sequencing) without introducing external orchestrators (Airflow) for straightforward ELT or transformation flows
 - Close integration with BigQuery datasets and lightweight automation for dashboards or downstream consumers
 
+
 **Reference:** [Pipelines Introduction](https://cloud.google.com/bigquery/docs/pipelines-introduction)
 
 ---
+
 
 ## 3. Key Concepts & Components
 
@@ -35,6 +51,7 @@ Use pipelines when you need:
 - **Scheduling:** Built-in scheduler to run pipelines at configured intervals (cron-like)
 - **Dataform:** Underpins pipeline management and versioning concepts inside BigQuery Studio; recommended for larger corp teams that need testing/version control
 
+
 **References:**
 - [Create Pipelines](https://cloud.google.com/bigquery/docs/create-pipelines)
 - [Create Notebooks](https://cloud.google.com/bigquery/docs/create-notebooks)
@@ -42,69 +59,76 @@ Use pipelines when you need:
 
 ---
 
+
 ## 4. Step-by-Step: Create Your First Pipeline (Simple SQL Pipeline)
 
 This lab is minimal and suitable for a beginner.
 
+
 **Precondition:** Access to BigQuery Studio and a project (no IAM instructions here).
+
 
 **Steps:**
 1. Open the Google Cloud Console → BigQuery (BigQuery Studio)
 2. Create or pick a dataset that will contain your output table
 3. Prepare a SQL query in the editor that writes to a destination table, for example:
 
-```sql
-CREATE OR REPLACE TABLE `project.dataset.daily_orders_summary` AS
-SELECT
-  DATE(order_ts) AS order_date,
-  COUNT(*) AS orders,
-  SUM(total_amount) AS revenue
-FROM `project.dataset.raw_orders`
-WHERE DATE(order_ts) = DATE_SUB(CURRENT_DATE(), INTERVAL 1 DAY);
-```
+   ```sql
+   CREATE OR REPLACE TABLE `project.dataset.daily_orders_summary` AS
+   SELECT
+     DATE(order_ts) AS order_date,
+     COUNT(*) AS orders,
+     SUM(total_amount) AS revenue
+   FROM `project.dataset.raw_orders`
+   WHERE DATE(order_ts) = DATE_SUB(CURRENT_DATE(), INTERVAL 1 DAY);
+   ```
 
 4. Save this SQL as an asset (**Save > Save query**)
 5. From the editor tab bar: click the **+ (arrow)** and choose **Pipeline → Get started** to create a pipeline. Add your saved SQL query as the first pipeline step
 6. Set the pipeline schedule (e.g., daily @ 02:00) and other settings. Save & run
 7. Monitor the run using the pipeline runs page / Jobs page inside BigQuery Studio
 
+
 **Reference:** [Create Pipelines](https://cloud.google.com/bigquery/docs/create-pipelines)
 
 ---
+
 
 ## 5. Step-by-Step: Notebook + SQL Pipeline (Example)
 
 Use notebooks when you need richer processing (Python, pandas, custom libraries, ML prep).
 
+
 **Steps:**
 1. Create a notebook from a query result or new notebook (BigQuery → Run Query → Query results → Open in > Notebook)
 2. In the notebook, write Python cells using the BigQuery client to run queries, transform data, and write back to BigQuery. Example snippet:
 
-```python
-from google.cloud import bigquery
-client = bigquery.Client()
+  ```python
+  from google.cloud import bigquery
+  client = bigquery.Client()
 
-# run a query
-job = client.query("""
-SELECT customer_id, COUNT(*) as orders
-FROM `project.dataset.raw_orders`
-WHERE order_ts >= DATE_SUB(CURRENT_DATE(), INTERVAL 30 DAY)
-GROUP BY customer_id
-""")
-df = job.to_dataframe()
+  # run a query
+  job = client.query("""
+  SELECT customer_id, COUNT(*) as orders
+  FROM `project.dataset.raw_orders`
+  WHERE order_ts >= DATE_SUB(CURRENT_DATE(), INTERVAL 30 DAY)
+  GROUP BY customer_id
+  """)
+  df = job.to_dataframe()
 
-# sample transform in pandas
-df['flag_high_value'] = df['orders'] > 10
+  # sample transform in pandas
+  df['flag_high_value'] = df['orders'] > 10
 
-# load back to BigQuery
-table_ref = client.dataset('dataset').table('monthly_customer_flag')
-job = client.load_table_from_dataframe(df, table_ref, job_config=bigquery.LoadJobConfig(write_disposition="WRITE_TRUNCATE"))
-job.result()
-```
+  # load back to BigQuery
+  table_ref = client.dataset('dataset').table('monthly_customer_flag')
+  job = client.load_table_from_dataframe(df, table_ref, job_config=bigquery.LoadJobConfig(write_disposition="WRITE_TRUNCATE"))
+  job.result()
+  ```
 
 3. Save the notebook as an asset and add it to a pipeline as a step (notebook step). Schedule as needed
 
 ---
+
 
 ## 6. Orchestration Patterns & Tips
 
@@ -112,9 +136,11 @@ job.result()
 - **Branching/conditional logic:** Not a native complex orchestration engine; for advanced branching, prefer using Dataflow/Airflow or Dataform + CI/CD. Use pipelines for mostly linear flows
 - **Reusability:** Keep SQL queries modular (views or stored query assets) so multiple pipelines can reuse them
 
+
 **Reference:** [Practical Intro & When to Use](https://medium.com/google-cloud/when-to-use-bigquery-pipelines-a-practical-introduction-2e1d4b2e92df)
 
 ---
+
 
 ## 7. Best Practices — Data & Query Design (Performance & Cost)
 
@@ -127,11 +153,13 @@ These are the highest impact operational recommendations:
 - **Avoid SELECT \*** in production queries; select only required columns to reduce bytes scanned
 - **Use materialized views** for frequently-run, expensive aggregations to precompute results and save query cost
 
+
 **References:**
 - [Best Practices Performance Overview](https://cloud.google.com/bigquery/docs/best-practices-performance-overview)
 - [Materialized Views Intro](https://cloud.google.com/bigquery/docs/materialized-views-intro)
 
 ---
+
 
 ## 8. Best Practices — Pipelines & Orchestration
 
@@ -140,25 +168,28 @@ These are the highest impact operational recommendations:
 - **Version control code assets** (Dataform or GIT workflows). For teams, Dataform inside BigQuery Studio helps follow software engineering practices (tests, environments, CI)
 - **Testing:** Write unit/integration checks (Dataform tests or queries that assert row counts / expected values)
 
+
 **Reference:** [Dataform](https://cloud.google.com/dataform)
 
 ---
+
 
 ## 9. Incremental & Upsert Patterns (Practical)
 
 MERGE is the canonical upsert in BigQuery: you can MERGE staging → target to insert new rows and update existing ones. For partitioned targets, include partition column in conditions to enable pruning and avoid scanning the whole table.
 
+
 **Example pattern (staging → target upsert):**
 
-```sql
-MERGE `project.dataset.target_table` T
-USING `project.dataset.staging_table` S
-ON T.primary_key = S.primary_key
-WHEN MATCHED THEN
-  UPDATE SET column1 = S.column1, ...
-WHEN NOT MATCHED THEN
-  INSERT (primary_key, column1, ...) VALUES (S.primary_key, S.column1, ...);
-```
+   ```sql
+   MERGE `project.dataset.target_table` T
+   USING `project.dataset.staging_table` S
+   ON T.primary_key = S.primary_key
+   WHEN MATCHED THEN
+     UPDATE SET column1 = S.column1, ...
+   WHEN NOT MATCHED THEN
+     INSERT (primary_key, column1, ...) VALUES (S.primary_key, S.column1, ...);
+   ```
 
 ---
 
@@ -167,9 +198,11 @@ WHEN NOT MATCHED THEN
 - **Minimize bytes scanned:** Partitioning, clustering, projection (no SELECT *), and materialized views reduce cost
 - **Choose pricing model:** On-demand vs flat-rate (reservations). BigQuery Reservations / slot management is useful for predictable heavy workloads. Check billing docs for your org
 
+
 **Reference:** [BigQuery Pricing](https://cloud.google.com/bigquery/pricing)
 
 ---
+
 
 ## 11. Monitoring, Logging & Troubleshooting
 
@@ -185,7 +218,9 @@ WHEN NOT MATCHED THEN
 
 ---
 
+
 ## 12. Example Training Exercises (Suggested Curriculum)
+
 
 **Module 1 — Fundamentals (hands-on)**
 - Lab A: Run a simple query and save as SQL asset
@@ -206,11 +241,14 @@ WHEN NOT MATCHED THEN
 - Use Dataform or pipeline workspaces for environment separation
 - Add automated tests that validate row counts, schema expectations, and sample data checks
 
+
 **Reference:** [Dataform](https://cloud.google.com/dataform)
 
 ---
 
+
 ## 14. Additional Resources (Official + Recommended Reading)
+
 
 **Official docs:**
 - [Pipelines Introduction](https://cloud.google.com/bigquery/docs/pipelines-introduction)
